@@ -1,24 +1,25 @@
 import Header from "./components/Header.jsx"
 import Guittar from "./components/Guittar.jsx"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { db } from "./data/db.js"
+
 
 export default function App() {
-  const [auth, setAuth] = useState(false);
-  console.log(auth)
+  const [data, setData] = useState(db)
   return (
     <>
     <Header/>
     <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
         <div className="row mt-5">
-            <Guittar/>
-            <Guittar/>
-            <Guittar/>
-            <Guittar/>
-            <Guittar/>
-            <Guittar/>
-            <Guittar/>
-            <Guittar/>
+          {data.map((guitar) => {
+            return(
+              <Guittar
+                key={guitar.id}
+                guitar={guitar}
+              />
+            )
+          })}
         </div>
     </main>
 
