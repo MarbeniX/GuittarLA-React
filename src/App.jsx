@@ -22,6 +22,7 @@ export default function App() {
       item.quantity = 1
       setCart([...cart, item])
     }
+    saveLocalStorage()
   }
 
   function removeFromCart(id){
@@ -54,6 +55,14 @@ export default function App() {
     setCart(updatedCart)
   }
 
+  function clearCart(){
+    setCart([])
+  }
+
+  function saveLocalStorage(){
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }
+
   return (
     <>
       <Header
@@ -61,6 +70,7 @@ export default function App() {
         removeFromCart={removeFromCart}
         increaseQuantity={increaseQuantity}
         decreaseQuantity={decreaseQuantity}
+        clearCart={clearCart}
       />
     <main className="container-xl mt-5">
       <h2 className="text-center">Nuestra Colección</h2>
