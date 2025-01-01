@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { db } from "../data/db.js"
 
 export const useCart= () => {
@@ -69,6 +69,10 @@ export const useCart= () => {
     setCart([])
     }
 
+    //Header logic
+    const isEmtpy = useMemo( () => cart.length === 0, [cart])
+    const cartTotal = useMemo( () => cart.reduce((total, item) => total + (item.quantity * item.price), 0, [cart]))
+
     return{
         data,
         cart,
@@ -76,6 +80,8 @@ export const useCart= () => {
         removeFromCart,
         decreaseQuantity,
         increaseQuantity,
-        clearCart
+        clearCart,
+        isEmtpy,
+        cartTotal
     }
 }
